@@ -4,6 +4,8 @@ A modular, offline-first React Native ToDo application built using TypeScript, R
 
 ---
 
+You can start by looking into the package.json — it outlines the scripts and dependencies that help structure the app’s flow. It’s a good entry point to understand the setup.
+
 ## 🚀 Features
 
 - ✅ Add, edit, delete, and mark tasks as complete
