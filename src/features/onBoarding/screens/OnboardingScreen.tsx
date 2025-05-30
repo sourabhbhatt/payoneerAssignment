@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
-import {useDispatch} from 'react-redux';
-import {StyleSheet, View} from 'react-native';
+import {useDispatch, useSelector} from 'react-redux';
+import {Linking, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import Animated, {
   FadeInUp,
   withTiming,
@@ -9,12 +9,15 @@ import Animated, {
   useAnimatedStyle,
 } from 'react-native-reanimated';
 
+import appUrl from '@api/appUrl';
 import {height} from '@utils/helper';
+import {RootState} from '@redux/store';
 import {COLORS} from 'constants/colors';
 import Button from '@components/Button';
 import {STRINGS} from 'constants/strings';
 import FadeText from '@components/FadeText';
 import {OnboardingScreenProps} from '../types';
+
 import {
   clearTaskList,
   resetSync,
@@ -25,6 +28,7 @@ const ENTRY_Y = height / 1.7;
 
 const OnboardingScreen: React.FC<OnboardingScreenProps> = ({navigation}) => {
   const dispatch = useDispatch();
+  const syncedOnce = useSelector((state: RootState) => state.tasks.syncedOnce);
 
   const borderRadius = useSharedValue(INITIAL_RADIUS);
   const translateY = useSharedValue(ENTRY_Y);
@@ -38,6 +42,8 @@ const OnboardingScreen: React.FC<OnboardingScreenProps> = ({navigation}) => {
     transform: [{translateY: translateY.value}],
     borderTopRightRadius: borderRadius.value,
   }));
+
+  const handleLink = () => Linking.openURL(appUrl.READ_ME_URL);
 
   return (
     <View style={styles.container}>
@@ -56,6 +62,9 @@ const OnboardingScreen: React.FC<OnboardingScreenProps> = ({navigation}) => {
         <FadeText text={STRINGS.APP_KEY_FEATURES_1} delay={500} />
         <FadeText text={STRINGS.APP_KEY_FEATURES_2} delay={700} />
         <FadeText text={STRINGS.APP_KEY_FEATURES_3} delay={900} />
+        <TouchableOpacity onPress={handleLink}>
+          <Text style={styles.codeLinkTitle}>{STRINGS.FOLLOW_CODE}</Text>
+        </TouchableOpacity>
 
         <Animated.View
           entering={FadeInUp.delay(1100).duration(400)}
@@ -66,14 +75,16 @@ const OnboardingScreen: React.FC<OnboardingScreenProps> = ({navigation}) => {
             onPress={() => navigation.navigate('Tasks')}
           />
         </Animated.View>
-        {/* <Button
-          title="Clear Data"
-          style={styles.clearBtn}
-          onPress={() => {
-            dispatch(clearTaskList());
-            dispatch(resetSync());
-          }}
-        /> */}
+        {syncedOnce && (
+          <Button
+            title={STRINGS.CLEAR_DATA_CACHE}
+            style={styles.clearBtn}
+            onPress={() => {
+              dispatch(clearTaskList());
+              dispatch(resetSync());
+            }}
+          />
+        )}
       </Animated.View>
     </View>
   );
@@ -108,6 +119,14 @@ const styles = StyleSheet.create({
     fontWeight: '500',
     fontStyle: 'italic',
     textAlign: 'center',
+  },
+
+  codeLinkTitle: {
+    fontSize: 12,
+    marginTop: 16,
+    fontWeight: '600',
+    color: COLORS.LINK,
+    textDecorationLine: 'underline',
   },
   buttonContainer: {
     marginTop: 24,

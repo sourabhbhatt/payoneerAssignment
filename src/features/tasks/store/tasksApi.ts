@@ -1,3 +1,4 @@
+import appUrl from '@api/appUrl';
 import Config from 'react-native-config';
 import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react';
 
@@ -6,10 +7,14 @@ export const tasksApi = createApi({
   baseQuery: fetchBaseQuery({baseUrl: `${Config.BASE_URL}`}),
   endpoints: builder => ({
     getTasks: builder.query({
-      query: () => 'todos?_limit=10',
+      query: () => `${appUrl.GET_TODOS}?_limit=10`,
     }),
     addTask: builder.mutation({
-      query: payload => ({url: 'todos', method: 'POST', body: payload}),
+      query: payload => ({
+        url: appUrl.GET_TODOS,
+        method: 'POST',
+        body: payload,
+      }),
     }),
   }),
 });

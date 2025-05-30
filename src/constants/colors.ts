@@ -9,6 +9,7 @@ export const COLORS = {
   PLACEHOLDER: '#2c2c2e',
   BACKGROUND: '#000000',
   DESCRIPTION: '#999999',
+  LINK: '#4E71FF',
 
   BUTTON_GRADIENT: ['#302E37', '#EA3F4C', '#18141D'],
 };

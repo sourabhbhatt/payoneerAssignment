@@ -58,7 +58,6 @@ const CreateTaskModal: FC<Props> = ({
     setTitle('');
     setDesc('');
   };
-  console.log('taskToEdit', taskToEdit);
 
   return (
     <Modal isVisible={visible} backdropOpacity={0.6} style={styles.modal}>

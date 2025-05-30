@@ -14,7 +14,6 @@ A modular, offline-first React Native ToDo application built using TypeScript, R
 - 🔍 Shows sync status & offline indicators
 - 🧠 Clean, typed Redux state management
 
-
 ---
 
 ## 📁 Project Structure
@@ -39,7 +38,6 @@ A modular, offline-first React Native ToDo application built using TypeScript, R
 - **React Native Config**
 - **React Native MMKV**
 
-
 💾 Why MMKV over AsyncStorage?
 🔥 Much faster (C++ powered)
 
@@ -48,7 +46,6 @@ A modular, offline-first React Native ToDo application built using TypeScript, R
 📉 No async/await needed for reads
 
 🧠 Ideal for offline-first & high-perf apps
-
 
 ---
 
@@ -63,19 +60,14 @@ A modular, offline-first React Native ToDo application built using TypeScript, R
 | Edit Support        | Update modal pre-fills task data for editing                         |
 | Type Safety         | Fully typed with `Task`, `TodoItemProps`, and slice state interfaces |
 
-
 ## 📂 Environment Setup
 
 `.env`
 
 env
-```BASE_URL=https://jsonplaceholder.typicode.com```
-
+`BASE_URL=https://jsonplaceholder.typicode.com`
 
 ---
-
-# Author
-Sourabh Bhatt
 
 ## 🧪 Getting Started
 
@@ -85,3 +77,6 @@ Sourabh Bhatt
 yarn install
 ```
 
+# 👨‍💻 Author
+
+## Sourabh Bhatt

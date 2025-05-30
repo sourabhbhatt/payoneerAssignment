@@ -1,13 +1,14 @@
 export const STRINGS = {
   APP_TITLE: 'Welcome to the App 👋',
-  TODO_TITLE: 'Todo App',
+  TODO_TITLE: 'Offline To-Do App',
 
-  APP_DESCRIPTION: `This is a demo Offline-First To-Do App built for Payoneer assignment.`,
-  SYNCING_TASK: 'Syncing your tasks from the internet...',
+  APP_DESCRIPTION: `A feature-rich, offline-first To-Do app built as part of the Payoneer assignment.`,
 
-  APP_KEY_FEATURES_1: '- Add, edit, and delete tasks easily',
-  APP_KEY_FEATURES_2: '- Works offline using MMKV & syncs online',
-  APP_KEY_FEATURES_3: '- Built using Redux Toolkit & RTK Query',
+  SYNCING_TASK: 'Syncing tasks from the server...',
+
+  APP_KEY_FEATURES_1: '- Seamlessly add, edit, and delete tasks',
+  APP_KEY_FEATURES_2: '- Reliable offline support with MMKV and auto-sync',
+  APP_KEY_FEATURES_3: '- Powered by Redux Toolkit and RTK Query',
 
   START_BUTTON_LABEL: 'Get Started',
 
@@ -16,11 +17,13 @@ export const STRINGS = {
   UPDATE: 'Update',
   CANCEL: 'Cancel',
   EDIT_TASK: 'Edit Task',
-  TASK_TITLE: 'Task Title',
+  CREATE_TASK: 'New Task',
   RETRY_SYNC: 'Retry Sync',
-  CREATE_TASK: 'Create Task',
-  TASK_DESC: 'Task Description',
-  FETCH_DATA: 'Fetch Data from server',
-  OFFLINE_TITLE: 'Showing offline data...',
-  NO_OFFLINE_TODOS_AVAILABLE: 'No offline tasks available.',
+  TASK_TITLE: 'Enter Task Title',
+  FETCH_DATA: 'Fetch Latest Tasks',
+  TASK_DESC: 'Enter Task Description',
+  CLEAR_DATA_CACHE: 'Clear Data/Cache',
+  OFFLINE_TITLE: 'You are offline. Displaying saved tasks.',
+  NO_OFFLINE_TODOS_AVAILABLE: 'No tasks available in offline mode.',
+  FOLLOW_CODE: 'Tap here to explore the codebase and documentation.',
 };

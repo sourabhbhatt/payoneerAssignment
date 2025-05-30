@@ -24,7 +24,7 @@ import {
 const TasksScreen: FC = () => {
   const dispatch = useDispatch();
   const [modalVisible, setModalVisible] = useState(false);
-  const [editingTask, setEditingTask] = useState<Object>(Object || null);
+  const [editingTask, setEditingTask] = useState<Task | null>(null);
 
   const tasks = useSelector((state: RootState) => state?.tasks?.data);
 
@@ -34,12 +34,20 @@ const TasksScreen: FC = () => {
 
   const handleToggle = (id: number) => dispatch(toggleTask(id));
   const handleDelete = (id: number) => dispatch(deleteTask(id));
+
   const handleUpdate = (id: number, title: string, description: string) => {
-    dispatch(updateTask({id, title, description}));
+    const task = tasks.find(t => t.id === id);
+    if (task) {
+      dispatch(updateTask({id, title, description}));
+    }
   };
+
   const handleEdit = (id: number, title: string, description: string) => {
-    setEditingTask({id, title, description});
-    setModalVisible(true);
+    const task = tasks.find(t => t.id === id);
+    if (task) {
+      setEditingTask(task);
+      setModalVisible(true);
+    }
   };
 
   const handleRetry = () => dispatch(resetSync());
@@ -76,13 +84,21 @@ const TasksScreen: FC = () => {
           </View>
         }
       />
-      <FAB onPress={() => setModalVisible(true)} />
+      <FAB
+        onPress={() => {
+          setEditingTask(null);
+          setModalVisible(true);
+        }}
+      />
       <CreateTaskModal
         onAdd={handleAddTask}
         onUpdate={handleUpdate}
         visible={modalVisible}
-        taskToEdit={editingTask as Task}
-        onClose={() => setModalVisible(false)}
+        taskToEdit={editingTask ?? null}
+        onClose={() => {
+          setModalVisible(false);
+          setEditingTask(null);
+        }}
       />
     </SafeAreaView>
   );
