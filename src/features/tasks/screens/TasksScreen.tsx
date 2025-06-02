@@ -4,6 +4,7 @@ import {SafeAreaView} from 'react-native-safe-area-context';
 import {StyleSheet, FlatList, View, Text, TouchableOpacity} from 'react-native';
 
 import FAB from '@components/FAB';
+import Tabs from '@components/Tabs';
 import {RootState} from '@redux/store';
 import {COLORS} from 'constants/colors';
 import {STRINGS} from 'constants/strings';
@@ -23,10 +24,14 @@ import {
 
 const TasksScreen: FC = () => {
   const dispatch = useDispatch();
+  const [activeTab, setActiveTab] = useState(0);
   const [modalVisible, setModalVisible] = useState(false);
   const [editingTask, setEditingTask] = useState<Task | null>(null);
 
   const tasks = useSelector((state: RootState) => state?.tasks?.data);
+  const filteredTasks = tasks.filter(task =>
+    activeTab === 0 ? !task.completed : task.completed,
+  );
 
   const handleAddTask = (title: string, description: string) => {
     dispatch(addTask({id: Date.now(), title, description, completed: false}));
@@ -68,8 +73,9 @@ const TasksScreen: FC = () => {
     <SafeAreaView style={styles.container}>
       <FadeText text={STRINGS.TODO_TITLE} delay={100} style={styles.title} />
       <TaskSyncer />
+      <Tabs tabs={['Pending', 'Completed']} onTabChange={setActiveTab} />
       <FlatList<Task>
-        data={tasks}
+        data={filteredTasks}
         renderItem={renderItem}
         contentContainerStyle={styles.list}
         keyExtractor={item => `${item?.id}`}
